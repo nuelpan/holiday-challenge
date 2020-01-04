@@ -5,5 +5,12 @@
     "database": "contact_list",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "production": {
+    "username": "vbwavouzvhhlvj",
+    "password": "564aa06d613a02773b638c58ccbc71464d97086e1bc8745d97f3887ff62895ed",
+    "database": "d3p7nk9f2gvp3m",
+    "host": "ec2-174-129-33-27.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
