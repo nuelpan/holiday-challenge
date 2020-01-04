@@ -2,7 +2,16 @@
 module.exports = (sequelize, DataTypes) => {
   class User extends sequelize.Sequelize.Model {};
   User.init ({
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true,
+      },
+      unique: {
+        args: true,
+        msg: 'Email address already in use!'
+      }
+    },
     password: DataTypes.STRING
   }, { sequelize });
   User.associate = function(models) {
