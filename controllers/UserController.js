@@ -11,7 +11,8 @@ class UserController {
     })
       .then( ({ dataValues }) => {
         const token = signToken({id: dataValues.id})
-        res.status(201).json({ token: token })
+        console.log(token)
+        res.status(201).json({ token })
       })
       .catch(err => next(err))
   }
@@ -19,14 +20,11 @@ class UserController {
   static login(req, res, next){
     const { email, password } = req.body
     User.findOne({ where: { email } })
-      .then(user => {
-        if (user) {
-          if(compare(password, user.password)) {
-            const token = signToken({id: user._id})
-            res.status(201).json({
-              name: user.name,
-              token: token
-            })
+      .then(({dataValues}) => {
+        if (dataValues) {
+          if(compare(password, dataValues.password)) {
+            const token = signToken({id: dataValues.id})
+            res.status(201).json({ token })
           } else {
             next({
               status: 400,

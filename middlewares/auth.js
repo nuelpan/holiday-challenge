@@ -5,7 +5,7 @@ const Contact = require('../models').Contact
 module.exports = {
   authenticate(req, res, next) {
     try {
-      console.log(req.headers.token)
+      console.log('token', req.headers.token)
       let {id} = verifyToken(req.headers.token)
       User.findByPk(id)
         .then(user => {

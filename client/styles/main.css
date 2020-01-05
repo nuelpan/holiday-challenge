@@ -1,6 +1,54 @@
 #home-wrapper {
-  display: none
-}
-#login-wrapper {
   display: none;
+  margin: auto;
+  padding-top: 2rem;
+}
+
+.button-wrapper {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+#addContact-button {
+  margin-left: auto;
+}
+
+#login-wrapper, #register-wrapper {
+  display: none;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 300px;
+  padding: 3rem 2rem;
+  background-color: #393e46;
+  border-radius: 6px;
+  color: #f3f3f3;
+  margin: auto;
+
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.8);
+}
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+p {
+  text-align: center;
+}
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 0 1rem;
+  height: 2rem;
+  border-radius: 3px;
+}
+table, tbody, thead, tr {
+  width: 100%;
+}
+#contact-table {
+  display: none;
+}
+.form-group label {
+  width: 90px;
 }

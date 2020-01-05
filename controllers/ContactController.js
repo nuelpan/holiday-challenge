@@ -15,10 +15,22 @@ class ContactController {
   }
   static findAll(req, res, next) {
     Contact.findAll({
-      where: {UserId: req.decodedId}
+      where: { UserId: req.decodedId },
+      order: [
+        ['updatedAt', 'DESC']
+      ]
     })
       .then(contacts => {
         res.status(200).json({ contacts })
+      })
+      .catch(err => next(err))
+  }
+  static findOne(req, res, next) {
+    Contact.findOne({
+      where: { UserId: req.decodedId, id: req.params.id }
+    })
+      .then(contact => {
+        res.status(200).json({ contact })
       })
       .catch(err => next(err))
   }
