@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contact Saver</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div id="home-wrapper">
+    <h1>Contact Saver</h1>
+    <a href="" id="link-logout">Logout</a>
+  </div>
+  <div id="register-wrapper">
+    <h1>Register Page</h1>
+    <form action="" id="register-form">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="text" id="new-email" placeholder="Input Email Here..." required>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" id="new-password" placeholder="Input Password Here..." required>
+      </div>
+      <div class="form-field">
+        <input type="submit" value="Register">
+      </div>
+    </form>
+    <p>Already have account? <a href="" id="link-login">Login</a></p>
+  </div>
+  <div id="login-wrapper">
+    <h1>Login Page</h1>
+    <form action="" id="login-form">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="text" id="email" placeholder="Input Email Here..." required>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Input Password Here..." required>
+      </div>
+      <div class="form-field">
+        <input type="submit" value="Register">
+      </div>
+    </form>
+    <p>Don't have account yet? <a href="" id="link-register">Register</a></p>
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+      if (localStorage.getItem('token')) {
+        $('#home-wrapper').css({'display': 'block'})
+        $('#login-wrapper').css({'display': 'none'})
+        $('#register-wrapper').css({'display': 'none'})
+      } else {
+        $('#home-wrapper').css({'display': 'none'})
+        $('#login-wrapper').css({'display': 'none'})
+        $('#register-wrapper').css({'display': 'block'})
+      }
+
+      $('#link-login').on('click', function(e) {
+        e.preventDefault()
+        $('#home-wrapper').css({'display': 'none'})
+        $('#login-wrapper').css({'display': 'block'})
+        $('#register-wrapper').css({'display': 'none'})
+      })
+      $('#link-logout').on('click', function(e) {
+        e.preventDefault()
+        localStorage.clear()
+        $('#home-wrapper').css({'display': 'none'})
+        $('#login-wrapper').css({'display': 'none'})
+        $('#register-wrapper').css({'display': 'block'})
+      })
+      $('#link-register').on('click', function(e) {
+        e.preventDefault()
+        $('#home-wrapper').css({'display': 'none'})
+        $('#login-wrapper').css({'display': 'none'})
+        $('#register-wrapper').css({'display': 'block'})
+      })
+
+      $('#register-form').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+          url: 'register',
+          method: 'POST',
+          data: {
+            email: $('#new-email').val(),
+            password: $('#new-password').val()
+          }
+        })
+        .done(data => {
+          localStorage.setItem('token', data.token)
+        })
+        .fail(({ responseJSON }) => {
+          console.log(responseJSON.message)
+        })
+      })
+
+      $('#login-form').on('submit', function(e) {
+        e.preventDefault()
+        $.ajax({
+          url: 'login',
+          method: 'POST',
+          data: {
+            email: $('#email').val(),
+            password: $('#password').val()
+          }
+        })
+        .done(data => {
+          localStorage.setItem('token', data.token)
+        })
+        .fail(({ responseJSON }) => {
+          console.log(responseJSON.message)
+        })
+      })
+    })
+  </script>
+</body>
+</html>
