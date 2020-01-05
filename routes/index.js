@@ -8,6 +8,6 @@ router.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'index.html'))
 })
 router.use('/', userRoute)
-// router.use('/contact', contactRoute)
+router.use('/contact', contactRoute)
 
 module.exports = router

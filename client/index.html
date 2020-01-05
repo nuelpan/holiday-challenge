@@ -41,7 +41,7 @@
         <input type="password" id="password" placeholder="Input Password Here..." required>
       </div>
       <div class="form-field">
-        <input type="submit" value="Register">
+        <input type="submit" value="Login">
       </div>
     </form>
     <p>Don't have account yet? <a href="" id="link-register">Register</a></p>
@@ -50,74 +50,6 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-  <script>
-    $(document).ready(function() {
-      if (localStorage.getItem('token')) {
-        $('#home-wrapper').css({'display': 'block'})
-        $('#login-wrapper').css({'display': 'none'})
-        $('#register-wrapper').css({'display': 'none'})
-      } else {
-        $('#home-wrapper').css({'display': 'none'})
-        $('#login-wrapper').css({'display': 'none'})
-        $('#register-wrapper').css({'display': 'block'})
-      }
-
-      $('#link-login').on('click', function(e) {
-        e.preventDefault()
-        $('#home-wrapper').css({'display': 'none'})
-        $('#login-wrapper').css({'display': 'block'})
-        $('#register-wrapper').css({'display': 'none'})
-      })
-      $('#link-logout').on('click', function(e) {
-        e.preventDefault()
-        localStorage.clear()
-        $('#home-wrapper').css({'display': 'none'})
-        $('#login-wrapper').css({'display': 'none'})
-        $('#register-wrapper').css({'display': 'block'})
-      })
-      $('#link-register').on('click', function(e) {
-        e.preventDefault()
-        $('#home-wrapper').css({'display': 'none'})
-        $('#login-wrapper').css({'display': 'none'})
-        $('#register-wrapper').css({'display': 'block'})
-      })
-
-      $('#register-form').on('submit', function(e) {
-        e.preventDefault()
-        $.ajax({
-          url: 'register',
-          method: 'POST',
-          data: {
-            email: $('#new-email').val(),
-            password: $('#new-password').val()
-          }
-        })
-        .done(data => {
-          localStorage.setItem('token', data.token)
-        })
-        .fail(({ responseJSON }) => {
-          console.log(responseJSON.message)
-        })
-      })
-
-      $('#login-form').on('submit', function(e) {
-        e.preventDefault()
-        $.ajax({
-          url: 'login',
-          method: 'POST',
-          data: {
-            email: $('#email').val(),
-            password: $('#password').val()
-          }
-        })
-        .done(data => {
-          localStorage.setItem('token', data.token)
-        })
-        .fail(({ responseJSON }) => {
-          console.log(responseJSON.message)
-        })
-      })
-    })
-  </script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>
